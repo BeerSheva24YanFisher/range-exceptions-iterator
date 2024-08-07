@@ -9,8 +9,7 @@ public class BrokenFloorTest {
 
     private int getMinimalBrokenFloor(BallBrokenFloor bbf){
         int low = 1;
-        int high = bbf.getnFloors();
-        int result = -1;
+        int high = Integer.MAX_VALUE;
 
         while (low <= high) {
             int mid = low + (high-low) / 2;
@@ -18,12 +17,10 @@ public class BrokenFloorTest {
                 bbf.checkFloor(mid);
                 low = mid + 1;
             } catch (Exception e) {
-                result = mid;
                 high = mid - 1;
             }
         }
-
-        return result;
+        return low;
     }
 
     @Test
