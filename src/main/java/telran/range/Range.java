@@ -1,9 +1,18 @@
 package telran.range;
 
-public class Range {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.Predicate;
+
+public class Range implements Iterable<Integer>{
     private static final String ERROR_MESSAGE = "max less or equal min";
     private static int min;
     private static int max;
+    private Predicate<Integer> predicate;
+
+    public void setPredicate(Predicate<Integer> predicate){
+        this.predicate = predicate;
+    }
 
     private Range(int min, int max) {
         this.min = min;
@@ -28,6 +37,32 @@ public class Range {
         
 
     }   
+
+    @Override
+    public Iterator<Integer> iterator() {
+       return new RangeIterator();
+    }
+
+
+    private class RangeIterator implements Iterator<Integer> {
+        int current = min;
+
+        @Override
+        public boolean hasNext() {
+            while (current <= max && !predicate.test(current)) {
+                current++;
+            }
+            return current <= max;
+        }
+
+        @Override
+        public Integer next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return current++;
+        }
+    }
     
 
 
