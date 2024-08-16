@@ -58,12 +58,10 @@ public class Range implements Iterable<Integer>{
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            int temp = current;
-            while (temp <= max && !predicate.test(temp)) {
-                temp++;
+            while (current <= max && !predicate.test(current)) {
+                current++;
             }
-            current = temp+1;
-            return temp;
+            return current++;
         }
     }
     
