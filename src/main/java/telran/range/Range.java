@@ -49,7 +49,7 @@ public class Range implements Iterable<Integer>{
 
         @Override
         public boolean hasNext() {
-            return current <= max && findNext() != null;
+            return current <= max;
         }
     
         private Integer findNext() {
