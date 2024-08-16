@@ -32,20 +32,6 @@ public class RangeTest {
          assertThrowsExactly(OutOfRangeMinValueException.class, () -> Range.checkNumber(MIN-1));
     }
 
-        // @Test
-    // void iteratorTest(){
-    //     Range rangIt = Range.getRange(0, 2);
-    //     Iterator<Integer> it = rangIt.iterator();
-    //     Integer [] expected = {0,1,2};
-    //     Integer [] actual = new Integer[expected.length];
-    //     int index = 0;
-    //     while(it.hasNext()){
-    //         actual[index++] = it.next();
-    //     }
-    //     assertArrayEquals(expected, actual);
-    //     assertThrowsExactly(NoSuchElementException.class, it::next);
-    // }
-
     @Test
     void iteratorTest(){
         Predicate<Integer> isPrime = n -> {

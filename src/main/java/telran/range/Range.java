@@ -45,7 +45,11 @@ public class Range implements Iterable<Integer>{
 
 
     private class RangeIterator implements Iterator<Integer> {
-        int current = min;
+        int current;
+
+        public RangeIterator() {
+            this.current = setCurrent(min);
+        }
 
         @Override
         public boolean hasNext() {
@@ -57,22 +61,18 @@ public class Range implements Iterable<Integer>{
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            setCurrent(current);
-            return current++;
+            int res = current;
+            current = setCurrent(current+1);
+            return res;
         }
 
-        private void setCurrent(int start) {
+        private int setCurrent(int start) {
             while (start <= max && !predicate.test(start)) {
                 start++;
             }
-            if (start>max) {
-                throw new NoSuchElementException();
-            }
             current = start;
+            return current;
         }
     }
-    
-
-
-    
+     
 }
