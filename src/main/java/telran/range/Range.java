@@ -59,14 +59,15 @@ public class Range implements Iterable<Integer>{
                 throw new NoSuchElementException();
             }
             setCurrent(current);
-            int result = current;
-            setCurrent(current + 1);
-            return result;
+            return current++;
         }
 
         private void setCurrent(int start) {
             while (start <= max && !predicate.test(start)) {
                 start++;
+            }
+            if (start>max) {
+                throw new NoSuchElementException();
             }
             current = start;
         }
