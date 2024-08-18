@@ -17,6 +17,7 @@ public class Range implements Iterable<Integer>{
     private Range(int min, int max) {
         this.min = min;
         this.max = max;
+        this.predicate = n -> true;
     }
 
     public static Range getRange(int min, int max) {
@@ -67,12 +68,13 @@ public class Range implements Iterable<Integer>{
         }
 
         private int setCurrent(int start) {
-            while (start <= max && !predicate.test(start)) {
+            while (start <= max && (predicate == null ||!predicate.test(start))) {
                 start++;
             }
             current = start;
             return current;
         }
+        
     }
      
 }
